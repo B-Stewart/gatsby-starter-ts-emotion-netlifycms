@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "types": ["@emotion/core"],
+    "noEmit": true,
+    "lib": ["dom", "es2017"],
+    "jsx": "react"
+  }
+}

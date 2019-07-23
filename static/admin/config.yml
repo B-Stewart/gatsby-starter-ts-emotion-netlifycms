@@ -1,0 +1,150 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+  accept_roles: #optional - accepts all users if left out
+    - admin
+
+media_folder: "static/uploads" # Media files will be stored in the repo under static/images/uploads
+public_folder: "/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "blogPosts"
+    label: "Blog Posts"
+    folder: "cms/blog-posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "blog-posts",
+        }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
+      - { label: "Featured Image", name: "featuredimage", widget: image }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
+  - label: "Pages"
+    name: "pages"
+    files:
+      - label: "Home Page"
+        name: "homePage"
+        file: "cms/pages/home.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "home-page",
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Hero Video, name: heroVideo, widget: file }
+          - { label: Team Title, name: teamTitle, widget: string }
+          - { label: Team Content, name: teamContent, widget: text }
+          - { label: Team Button, name: teamButton, widget: string }
+          - label: "Team Image"
+            name: "teamImg"
+            widget: "image"
+            allow_multiple: false
+            required: false
+          - label: "Banner Image"
+            name: "bannerImg"
+            widget: "image"
+            allow_multiple: false
+            required: false
+          - label: "Icon Blocks"
+            name: "iconBlocks"
+            widget: "list"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Content, name: content, widget: string }
+          - { label: "About Title", name: aboutTitle, widget: string }
+          - { label: "About Content", name: aboutContent, widget: text }
+      - label: "Blog Page"
+        name: "blogPage"
+        file: "cms/pages/blog.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "blog-page",
+            }
+          - { label: Title, name: title, widget: string }
+          - label: "Hero Image"
+            name: "heroImg"
+            widget: "image"
+            allow_multiple: false
+            required: true
+      - label: "Not Found Page"
+        name: "notFoundPage"
+        file: "cms/pages/404.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "404-page",
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Subtitle, name: subtitle, widget: string }
+      - label: "Thank You Page"
+        name: "thanksPage"
+        file: "cms/pages/thanks.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "thanks-page",
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Subtitle, name: subtitle, widget: string }
+  - label: "Sitewide"
+    name: "sitewide"
+    files:
+      - label: "Header"
+        name: "header"
+        file: "cms/sitewide/header.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "header",
+            }
+          - { label: Banner Content, name: bannerContent, widget: string }
+          - { label: Banner Button, name: bannerBtn, widget: string }
+          - label: "Links"
+            name: "links"
+            widget: "list"
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Link, name: link, widget: string }
+      - label: "Footer"
+        name: "footer"
+        file: "cms/sitewide/footer.md"
+        fields:
+          - {
+              label: Template Key,
+              name: templateKey,
+              widget: hidden,
+              default: "footer",
+            }
+          - { label: Contact Title, name: contactTitle, widget: string }
+          - { label: Contact Content, name: contactContent, widget: text }
+          - { label: Visit Title, name: visitTitle, widget: string }
+          - label: "Contact Image"
+            name: "contactImg"
+            widget: "image"
+            allow_multiple: false
+            required: false
+          - label: "Info"
+            name: "info"
+            widget: "list"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Content, name: mdContent, widget: markdown }
