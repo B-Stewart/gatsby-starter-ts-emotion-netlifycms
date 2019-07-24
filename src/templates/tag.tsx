@@ -2,6 +2,10 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { PageWrapper } from "../components/wrapper";
+import { createSubArrays } from "../utilities";
+import { ArticleRow } from "../components/article-row";
 
 interface ITag {
   data: {
@@ -13,15 +17,11 @@ interface ITag {
           };
           frontmatter: {
             title: string;
+            featuredImage: IChildImageSharpFluid;
           };
         };
       }[];
       totalCount: number;
-    };
-    site: {
-      siteMetadata: {
-        title: string;
-      };
     };
   };
   pageContext: any;
@@ -37,7 +37,6 @@ const Tag: React.SFC<ITag> = ({ data, pageContext }) => {
     </li>
   ));
   const tag = pageContext.tag;
-  const title = data.site.siteMetadata.title;
   const totalCount = data.allMarkdownRemark.totalCount;
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
@@ -45,23 +44,14 @@ const Tag: React.SFC<ITag> = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <section className="section">
-        <Helmet title={`${tag} | ${title}`} />
-        <div className="container content">
-          <div className="columns">
-            <div
-              className="column is-10 is-offset-1"
-              style={{ marginBottom: "6rem" }}
-            >
-              <h3 className="title is-size-4 is-bold-light">{tagHeader}</h3>
-              <ul className="taglist">{postLinks}</ul>
-              <p>
-                <Link to="/tags/">Browse all tags</Link>
-              </p>
-            </div>
-          </div>
+      <SEO title={tag} />
+      <PageWrapper>
+        <div>
+          <Link to="/tags/">Browse all tags</Link>
         </div>
-      </section>
+        <h1>{tagHeader}</h1>
+        <ArticleRow edges={data.allMarkdownRemark.edges} />
+      </PageWrapper>
     </Layout>
   );
 };
@@ -70,11 +60,6 @@ export default Tag;
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {
@@ -92,6 +77,13 @@ export const tagPageQuery = graphql`
           }
           frontmatter {
             title
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 1000, quality: 80) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }

@@ -9,7 +9,7 @@ import { IChildImageSharpFluid, IFileUpload } from "../interfaces";
 import GatsbyImage from "gatsby-image";
 import { FlexBlocks, FlexBlock } from "../components/flex-blocks";
 import { IconBlock } from "../components/icon-block";
-import { Wrapper } from "../components/wrapper";
+import { PageWrapper } from "../components/wrapper";
 import { ButtonWrapper } from "../components/button";
 import { Link } from "../components/link";
 import { P, PSize } from "../components/typography/p";
@@ -47,7 +47,7 @@ const IndexPage: React.SFC<IIndexPageProps> = ({ data }) => {
           <Link to="#contact">{data.content.frontmatter.teamButton}</Link>
         </ButtonWrapper>
       </ContentFade>
-      <Wrapper id="about" css={{ paddingTop: 64, paddingBottom: 64 }}>
+      <PageWrapper id="about">
         <h3>{data.content.frontmatter.aboutTitle}</h3>
         <P size={PSize.large}>{data.content.frontmatter.aboutContent}</P>
         <FlexBlocks>
@@ -57,7 +57,7 @@ const IndexPage: React.SFC<IIndexPageProps> = ({ data }) => {
             </FlexBlockPadded>
           ))}
         </FlexBlocks>
-      </Wrapper>
+      </PageWrapper>
       <GatsbyImage
         sizes={data.content.frontmatter.bannerImg.childImageSharp.fluid}
         css={{

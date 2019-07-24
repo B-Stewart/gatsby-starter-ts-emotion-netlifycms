@@ -4,29 +4,29 @@ import { HeroBanner } from "../components/hero-banner";
 import { IChildImageSharpFluid } from "../interfaces";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { Wrapper } from "../components/wrapper";
-import { Link } from "../components/link";
+import { PageWrapper } from "../components/wrapper";
+import { ArticleRow } from "../components/article-row";
 
 export interface IBlogPageProps {
   data: IBlogPageQuery;
 }
 
-const BlogPage: React.SFC<IBlogPageProps> = ({ data }) => (
-  <Layout>
-    <SEO title="Blogs" />
-    <HeroBanner
-      backgroundImageSrc={
-        data.content.frontmatter.heroImg.childImageSharp.fluid.src
-      }
-      title={data.content.frontmatter.title}
-    />
-    <Wrapper css={{ paddingTop: 64, paddingBottom: 64 }}>
-      {data.articles.edges.map(edge => (
-        <Link to={edge.node.fields.slug}>{edge.node.frontmatter.title}</Link>
-      ))}
-    </Wrapper>
-  </Layout>
-);
+const BlogPage: React.SFC<IBlogPageProps> = ({ data }) => {
+  return (
+    <Layout>
+      <SEO title="Blogs" />
+      <HeroBanner
+        backgroundImageSrc={
+          data.content.frontmatter.heroImg.childImageSharp.fluid.src
+        }
+        title={data.content.frontmatter.title}
+      />
+      <PageWrapper>
+        <ArticleRow edges={data.articles.edges} />
+      </PageWrapper>
+    </Layout>
+  );
+};
 
 export default BlogPage;
 
@@ -85,7 +85,7 @@ export const query = graphql`
             date(formatString: "MMMM DD, YYYY")
             featuredImage {
               childImageSharp {
-                fluid(maxWidth: 120, quality: 80) {
+                fluid(maxWidth: 1000, quality: 80) {
                   ...GatsbyImageSharpFluid
                 }
               }

@@ -7,3 +7,8 @@ export const Wrapper = styled.div({
   paddingLeft: 16,
   paddingRight: 16,
 });
+
+export const PageWrapper = styled(Wrapper)({
+  paddingTop: 32,
+  paddingBottom: 32,
+});

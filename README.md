@@ -4,11 +4,10 @@
 
 # TODO:
 
-- Finish Blogs
-- Lambda Functions
-- Fix Image quality
+- Move Article Row Queries to partial queries to share logic
 - Use Background Video / Image Web components
 - Move Logo to CMS
 - Move Favicon to CMS
 - Extract the Md Gatsby child markdown helper to plugin
 - Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
+- Cleanup gatsby-node (by packages?)

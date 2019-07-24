@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
 import SEO from "../components/seo";
 import { HeroBanner } from "../components/hero-banner";
-import { Wrapper } from "../components/wrapper";
+import { PageWrapper } from "../components/wrapper";
 import { IChildImageSharpFluid } from "../interfaces";
 import styled from "@emotion/styled";
 
@@ -47,7 +47,7 @@ const ArticleTemplate: React.SFC<IArticleTemplate> = ({ data }) => {
         }
         title={data.markdownRemark.frontmatter.title}
       />
-      <Wrapper>
+      <PageWrapper>
         <h3>{data.markdownRemark.frontmatter.description}</h3>
         <DangerouslySetInnerHtml>
           {data.markdownRemark.html}
@@ -63,7 +63,7 @@ const ArticleTemplate: React.SFC<IArticleTemplate> = ({ data }) => {
             ))}
           </TagWrapper>
         ) : null}
-      </Wrapper>
+      </PageWrapper>
     </Layout>
   );
 };

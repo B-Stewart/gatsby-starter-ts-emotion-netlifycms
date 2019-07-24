@@ -5,7 +5,6 @@ import { Link as GatsbyLink, navigateTo } from "gatsby";
 import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 export const isInternalLink = link => {
-  console.log(link, /^\/(?!\/)/.test(link));
   return /^\/(?!\/)/.test(link);
 };
 
