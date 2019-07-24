@@ -33,7 +33,7 @@ export const Footer: React.SFC<IFooterProps> = () => {
             frontmatter {
               contactImg {
                 childImageSharp {
-                  fluid(maxWidth: 500, quality: 75) {
+                  fluid(maxWidth: 500, quality: 85) {
                     ...GatsbyImageSharpFluid
                   }
                 }

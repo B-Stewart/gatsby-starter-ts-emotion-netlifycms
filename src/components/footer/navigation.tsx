@@ -21,7 +21,7 @@ const NavigationWrapper = styled.div({
 
 const FlexWrapper = styled.div({
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "center",
   flexDirection: "column",
   [mediaQuery.greaterThan.lg]: {
     flexDirection: "row",

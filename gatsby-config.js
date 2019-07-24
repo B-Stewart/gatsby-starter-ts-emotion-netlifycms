@@ -44,7 +44,7 @@ module.exports = {
       resolve: `gatsby-plugin-web-font-loader`,
       options: {
         google: {
-          families: ["Lato:300,400,700", "Lora:400,700"],
+          families: ["Oswald:300,400,700", "Playfair+Display:400,700"],
         },
       },
     },
@@ -84,7 +84,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-svgr",
-    // "gatsby-plugin-offline",
     `gatsby-plugin-typescript`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-netlify-cms`,

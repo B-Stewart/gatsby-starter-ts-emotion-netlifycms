@@ -6,7 +6,7 @@ export const GlobalStyles: React.SFC = () => (
   <Global
     styles={`
         * {
-          font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+          font-family: "Oswald", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
             "Roboto", "Helvetica Neue", Arial, sans-serif;
           box-sizing: border-box;
         }
@@ -37,7 +37,7 @@ export const GlobalStyles: React.SFC = () => (
         h4,
         h5,
         h6 {
-          font-family: "Lora", Georgia, "Times New Roman", Times, serif;
+          font-family: "Playfair Display", Georgia, "Times New Roman", Times, serif;
           color: ${colors.secondary.base};
           margin: 0 0 1em 0;
           letter-spacing: 1px;

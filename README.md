@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d99d8c8d-62af-4761-9bf2-c2f317e7705e/deploy-status)](https://app.netlify.com/sites/gatsby-starter-ts-emotion-netlifycms/deploys)
+
 # Gatsby Starter TypeScript Emotion and Netlify CMS
 
 # TODO:

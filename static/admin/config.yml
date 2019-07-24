@@ -8,9 +8,9 @@ media_folder: "static/uploads" # Media files will be stored in the repo under st
 public_folder: "/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
-  - name: "blogPosts"
-    label: "Blog Posts"
-    folder: "cms/blog-posts"
+  - name: "blogArticles"
+    label: "Blog Articles"
+    folder: "cms/blogs"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -18,15 +18,19 @@ collections:
           label: "Template Key",
           name: "templateKey",
           widget: "hidden",
-          default: "blog-posts",
+          default: "blogs",
         }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
-      - { label: "Featured Image", name: "featuredimage", widget: image }
+      - {
+          label: "Featured Image",
+          name: "featuredImage",
+          widget: image,
+          required: false,
+        }
       - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
   - label: "Pages"
     name: "pages"
     files:
