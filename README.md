@@ -24,3 +24,4 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - Extract the Md Gatsby child markdown helper to plugin
 - Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
 - Cleanup gatsby-node (by packages?)
+- Fix production webpack analyzer to not just be cms

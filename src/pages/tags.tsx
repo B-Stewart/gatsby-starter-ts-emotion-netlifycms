@@ -1,7 +1,7 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { HeroBanner } from "../components/hero-banner";
-import kebabCase from "lodash/kebabcase";
+import kebabCase from "lodash.kebabcase";
 import { IChildImageSharpFluid } from "../interfaces";
 import Layout from "../components/layout";
 import SEO from "../components/seo";

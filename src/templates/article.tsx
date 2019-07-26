@@ -1,5 +1,5 @@
 import * as React from "react";
-import { kebabCase } from "lodash";
+import kebabCase from "lodash.kebabcase";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
