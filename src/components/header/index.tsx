@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { Link } from "../link";
 import { colors, mediaQuery } from "../../utilities";
-import { IoMdMenu } from "react-icons/io";
+import { IoMdMenu, IoLogoGithub } from "react-icons/io";
 import { Wrapper } from "../wrapper";
 import { ReactComponent as Logo } from "../../media/images/icons/logo.svg";
 
@@ -143,7 +143,12 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
                   <Logo />
                 </Link>
               </SiteLogo>
-              <DesktopMenu>{linkComponents}</DesktopMenu>
+              <DesktopMenu>
+                {linkComponents}
+                <Link to="https://github.com/B-Stewart/gatsby-starter-ts-emotion-netlifycms">
+                  <IoLogoGithub />
+                </Link>
+              </DesktopMenu>
               <MobileMenu>
                 <IoMdMenu
                   css={{ height: 40, width: 40, cursor: "pointer" }}
@@ -154,7 +159,12 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
 
             {isMenuOpen ? (
               <MobileMenu>
-                <MobileMenuDropdown>{linkComponents}</MobileMenuDropdown>
+                <MobileMenuDropdown>
+                  {linkComponents}
+                  <Link to="https://github.com/B-Stewart/gatsby-starter-ts-emotion-netlifycms">
+                    <IoLogoGithub />
+                  </Link>
+                </MobileMenuDropdown>
               </MobileMenu>
             ) : null}
           </Wrapper>

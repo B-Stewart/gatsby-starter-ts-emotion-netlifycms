@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { colors, mediaQuery } from "../../utilities";
+import "@swift-soul-ui/background-video/dist/ssui-background-video";
 
 interface IHeroVideoProps {
   videoSrc: string;

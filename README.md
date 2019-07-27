@@ -17,10 +17,11 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 # TODO:
 
 - Move Article Row Queries to partial queries to share logic
-- Add GitHub link to site header
+- Better way to add icons to header links
 - Use Background Video / Image Web components
 - Move Logo to CMS
 - Move Favicon to CMS
+- Move More Content to CMS
 - Extract the Md Gatsby child markdown helper to plugin
 - Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
 - Cleanup gatsby-node (by packages?)
