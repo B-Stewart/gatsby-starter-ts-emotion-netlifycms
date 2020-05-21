@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Link } from "../link";
 import { colors, mediaQuery } from "../../utilities";
 import { IoMdMenu, IoLogoGithub } from "react-icons/io";
-import { Wrapper } from "../wrapper";
+import { PageWrapper } from "../page-wrapper";
 import { ReactComponent as Logo } from "../../media/images/icons/logo.svg";
 
 export interface IHeaderLink {
@@ -80,14 +80,14 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
   };
 
   toggleMenu = () => {
-    this.setState(state =>
+    this.setState((state) =>
       this.setState({
         isMenuOpen: !state.isMenuOpen,
       }),
     );
   };
 
-  setMenu = openState => {
+  setMenu = (openState) => {
     this.setState({
       isMenuOpen: openState,
     });
@@ -136,7 +136,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       <>
         <HeaderPadding />
         <HeaderWrapper>
-          <Wrapper>
+          <div className="container">
             <HeaderFlexWrapper>
               <SiteLogo>
                 <Link to="/" css={{ display: "inline-block" }}>
@@ -167,7 +167,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
                 </MobileMenuDropdown>
               </MobileMenu>
             ) : null}
-          </Wrapper>
+          </div>
         </HeaderWrapper>
       </>
     );

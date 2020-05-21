@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { Wrapper } from "../wrapper";
+import { PageWrapper } from "../page-wrapper";
 import { colors, mediaQuery } from "../../utilities";
 
 interface IBackgroundImage {
@@ -48,9 +48,9 @@ export const ContentFade: React.SFC<IContentFadeProps> = ({
   return (
     <ContentFadeWrapper id={id}>
       <BackgroundImage backgroundUrl={imgSrc} />
-      <Wrapper css={{ zIndex: 2, position: "relative" }}>
+      <PageWrapper css={{ zIndex: 2, position: "relative" }}>
         <ContentFadeFormWrapper>{children}</ContentFadeFormWrapper>
-      </Wrapper>
+      </PageWrapper>
     </ContentFadeWrapper>
   );
 };

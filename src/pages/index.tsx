@@ -1,18 +1,17 @@
 import * as React from "react";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import styled from "@emotion/styled";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import { Layout } from "../components/layout";
+import { SEO } from "../components/seo";
 import { HeroVideo } from "../components/hero-video";
 import { ContentFade } from "../components/content-fade";
 import { IChildImageSharpFluid, IFileUpload } from "../interfaces";
 import GatsbyImage from "gatsby-image";
 import { FlexBlocks, FlexBlock } from "../components/flex-blocks";
 import { IconBlock } from "../components/icon-block";
-import { PageWrapper } from "../components/wrapper";
+import { PageWrapper } from "../components/page-wrapper";
 import { ButtonWrapper } from "../components/button";
 import { Link } from "../components/link";
-import { P, PSize } from "../components/typography/p";
 
 const FlexBlockPadded = styled(FlexBlock)({
   paddingLeft: 8,
@@ -25,14 +24,14 @@ const FlexBlockPadded = styled(FlexBlock)({
   },
 });
 
-export interface IIndexPageProps {
+export interface IIndexPageProps extends PageProps {
   data: IIndexPageQuery;
-  location: Location;
 }
 
-const IndexPage: React.SFC<IIndexPageProps> = ({ data }) => {
+const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
   return (
     <Layout>
+      {/* TODO: Move title to netlify, maybe have global seo specific titles? */}
       <SEO title="Home" />
       <HeroVideo
         videoSrc={data.content.frontmatter.heroVideo.publicURL}
@@ -42,14 +41,16 @@ const IndexPage: React.SFC<IIndexPageProps> = ({ data }) => {
         imgSrc={data.content.frontmatter.teamImg.childImageSharp.fluid.src}
       >
         <h3>{data.content.frontmatter.teamTitle}</h3>
-        <P>{data.content.frontmatter.teamContent}</P>
+        <p>{data.content.frontmatter.teamContent}</p>
         <ButtonWrapper variant="primary">
           <Link to="#contact">{data.content.frontmatter.teamButton}</Link>
         </ButtonWrapper>
       </ContentFade>
-      <PageWrapper id="about">
-        <h3>{data.content.frontmatter.aboutTitle}</h3>
-        <P size={PSize.large}>{data.content.frontmatter.aboutContent}</P>
+      <PageWrapper id="about" className="container">
+        <h3 className="text-center">{data.content.frontmatter.aboutTitle}</h3>
+        <p className="text-lg text-center">
+          {data.content.frontmatter.aboutContent}
+        </p>
         <FlexBlocks>
           {data.content.frontmatter.iconBlocks.map((ib, i) => (
             <FlexBlockPadded key={i}>

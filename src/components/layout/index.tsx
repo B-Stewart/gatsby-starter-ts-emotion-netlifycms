@@ -1,11 +1,9 @@
-import * as React from "react";
-import { StaticQuery, graphql } from "gatsby";
-import Header from "../header";
-import "normalize.css";
-import { Footer } from "../footer";
-import { GlobalStyles } from "./global-styles";
+import "../../styles/main.css";
 
-export interface ILayoutProps {}
+import * as React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import Header from "../header";
+import { Footer } from "../footer";
 
 interface ILayoutQueryData {
   header: {
@@ -18,34 +16,30 @@ interface ILayoutQueryData {
   };
 }
 
-const Layout: React.SFC<ILayoutProps> = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query LayoutQuery {
-        header: markdownRemark(frontmatter: { templateKey: { eq: "header" } }) {
-          frontmatter {
-            links {
-              link
-              name
-            }
+export const Layout: React.FC = ({ children }) => {
+  const data: ILayoutQueryData = useStaticQuery(graphql`
+    query LayoutQuery {
+      header: markdownRemark(frontmatter: { templateKey: { eq: "header" } }) {
+        frontmatter {
+          links {
+            link
+            name
           }
         }
       }
-    `}
-    render={(data: ILayoutQueryData) => (
-      <>
-        <GlobalStyles />
-        <Header
-          links={data.header.frontmatter.links.map(l => ({
-            to: l.link,
-            name: l.name,
-          }))}
-        />
-        <section>{children}</section>
-        <Footer />
-      </>
-    )}
-  />
-);
+    }
+  `);
 
-export default Layout;
+  return (
+    <>
+      <Header
+        links={data.header.frontmatter.links.map((l) => ({
+          to: l.link,
+          name: l.name,
+        }))}
+      />
+      <section>{children}</section>
+      <Footer />
+    </>
+  );
+};

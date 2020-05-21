@@ -2,7 +2,7 @@
   "compilerOptions": {
     "types": ["@emotion/core"],
     "noEmit": true,
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "ESNext"],
     "jsx": "react"
   }
 }

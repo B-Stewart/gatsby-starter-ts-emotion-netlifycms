@@ -1,11 +1,11 @@
 import * as React from "react";
 import kebabCase from "lodash.kebabcase";
 import { graphql, Link } from "gatsby";
-import Layout from "../components/layout";
+import { Layout } from "../components/layout";
 import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
-import SEO from "../components/seo";
+import { SEO } from "../components/seo";
 import { HeroBanner } from "../components/hero-banner";
-import { PageWrapper } from "../components/wrapper";
+import { PageWrapper } from "../components/page-wrapper";
 import { IChildImageSharpFluid } from "../interfaces";
 import styled from "@emotion/styled";
 
@@ -56,7 +56,7 @@ const ArticleTemplate: React.SFC<IArticleTemplate> = ({ data }) => {
         data.markdownRemark.frontmatter.tags.length ? (
           <TagWrapper>
             <h4>Tags: </h4>
-            {data.markdownRemark.frontmatter.tags.map(tag => (
+            {data.markdownRemark.frontmatter.tags.map((tag) => (
               <Tag key={tag + `tag`}>
                 <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
               </Tag>

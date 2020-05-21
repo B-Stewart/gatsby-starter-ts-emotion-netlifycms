@@ -2,9 +2,9 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { HeroBanner } from "../components/hero-banner";
 import { IChildImageSharpFluid } from "../interfaces";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import { PageWrapper } from "../components/wrapper";
+import { Layout } from "../components/layout";
+import { SEO } from "../components/seo";
+import { PageWrapper } from "../components/page-wrapper";
 import { ArticleRow } from "../components/article-row";
 
 export interface IBlogPageProps {

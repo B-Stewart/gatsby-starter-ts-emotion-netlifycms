@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { Wrapper } from "../wrapper";
+import { PageWrapper } from "../page-wrapper";
 import { colors, mediaQuery } from "../../utilities";
 import { DangerouslySetInnerHtml } from "../dangerously-set-inner-html";
 
@@ -52,7 +52,7 @@ export const Navigation: React.SFC<INavigationProps> = ({
 }) => {
   return (
     <NavigationWrapper>
-      <Wrapper css={{ position: "relative" }}>
+      <PageWrapper css={{ position: "relative" }}>
         <FlexWrapper>
           {navigationBlocks.map((nb, i) => (
             <FlexItem key={i}>
@@ -63,7 +63,7 @@ export const Navigation: React.SFC<INavigationProps> = ({
             </FlexItem>
           ))}
         </FlexWrapper>
-      </Wrapper>
+      </PageWrapper>
     </NavigationWrapper>
   );
 };

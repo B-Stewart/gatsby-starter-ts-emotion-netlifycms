@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { Wrapper } from "../wrapper";
+import { PageWrapper } from "../page-wrapper";
 import PigeonMap from "pigeon-maps";
 import Marker from "pigeon-marker";
 
@@ -21,11 +21,11 @@ export const Map: React.SFC<IMapProps> = ({
   title,
 }) => (
   <MapWrapper id="map">
-    <Wrapper>
+    <PageWrapper>
       <h3>{title}</h3>
       <PigeonMap defaultCenter={position} defaultZoom={12} height={250}>
         <Marker anchor={position} onClick={handleMarkerClick} />
       </PigeonMap>
-    </Wrapper>
+    </PageWrapper>
   </MapWrapper>
 );

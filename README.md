@@ -5,14 +5,17 @@
 ## Getting Started
 
 ```
-$ gatsby new [SITE_DIRECTORY_NAME] https://github.com/B-Stewart/gatsby-starter-ts-emotion-netlifycms
-$ cd [SITE_DIRECTORY_NAME]
+$ npm i
 $ npm start
 ```
 
 ### Setting up the CMS
 
 Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting.
+
+## Dependencies
+
+- CLSX (classnames alternative, tiny);
 
 # TODO:
 
@@ -26,3 +29,21 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
 - Cleanup gatsby-node (by packages?)
 - Fix production webpack analyzer to not just be cms
+
+# TODO 2020:
+
+- Clean up original TODO
+- Clean Up Readme
+- Migrate to tailwind instead of emotion
+- Move all theme styles to CMS data
+- Do all source code todo's
+- Consider consolidating 404 and thanks page to a generic page "type" with title / subtitle
+- Consider moving layout to templates?
+- Add ESLint
+- Add stricter TS?
+- Bundle Optimization
+- Add Preact?
+- Do lighthouse checks
+- storybook?
+- unit tests?
+- describe dependencies and usefulness

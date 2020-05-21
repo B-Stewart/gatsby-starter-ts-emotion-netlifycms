@@ -1,26 +1,19 @@
 import * as React from "react";
-import { graphql } from "gatsby";
-import styled from "@emotion/styled";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import { P } from "../components/typography/p";
+import { graphql, PageProps } from "gatsby";
+import { Layout } from "../components/layout";
+import { SEO } from "../components/seo";
+import { PageWrapper } from "../components/page-wrapper";
 
-export interface INotFoundPage {
+export interface INotFoundPage extends PageProps {
   data: INotFoundPageQuery;
 }
 
-const PageWrapper = styled.div({
-  textAlign: "center",
-  paddingTop: 64,
-  paddingBottom: 64,
-});
-
-const NotFoundPage: React.SFC<INotFoundPage> = ({ data }) => (
+const NotFoundPage: React.FC<INotFoundPage> = ({ data }) => (
   <Layout>
     <SEO title={data.content.frontmatter.title} />
-    <PageWrapper>
+    <PageWrapper className="py-16 text-center">
       <h1>{data.content.frontmatter.title}</h1>
-      <P>{data.content.frontmatter.subtitle}</P>
+      <p>{data.content.frontmatter.subtitle}</p>
     </PageWrapper>
   </Layout>
 );
