@@ -17,3 +17,8 @@ export interface IChildImageSharpFluid {
 export interface IFileUpload {
   publicURL: string;
 }
+
+export enum Variants {
+  primary = "primary",
+  secondary = "secondary",
+}

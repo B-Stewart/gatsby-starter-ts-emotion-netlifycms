@@ -11,24 +11,13 @@ module.exports = {
     colors: {
       white: defaultTheme.colors.white,
       black: defaultTheme.colors.black,
-      neutral: {
-        light: defaultTheme.colors.gray[300],
-        default: defaultTheme.colors.gray[600],
-        dark: defaultTheme.colors.gray[900],
-      },
-      primary: {
-        light: "#DF97C0",
-        default: "#AD407D",
-        dark: "#760E49",
-      },
-      secondary: {
-        light: "#6EC4AF",
-        default: "#28957A",
-        dark: "#05674E",
-      },
+      neutral: defaultTheme.colors.gray,
+      primary: defaultTheme.colors.teal,
+      secondary: defaultTheme.colors.purple,
     },
     container: {
       center: true,
+      padding: "1rem",
     },
   },
   variants: {},

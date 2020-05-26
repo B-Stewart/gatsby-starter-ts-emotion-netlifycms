@@ -1,36 +1,44 @@
-import styled from "@emotion/styled";
-import { CSSObject } from "@emotion/core";
-import { colors } from "../../utilities";
+import * as React from "react";
+import { DetailedHTMLProps, ButtonHTMLAttributes } from "react";
+import { ILinkProps, Link } from "../link";
+import { Variants } from "../../interfaces";
 
-interface IButtonProps {
-  variant?: "primary" | "secondary";
-  outline?: boolean;
+interface IButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  variant?: Variants;
 }
 
-const styles = ({ outline, variant }: IButtonProps): CSSObject => ({
-  display: "inline-block",
-  backgroundColor: outline ? "transparent" : colors[variant].base,
-  color: colors.light,
-  padding: "8px 32px",
-  transition: "background-color 250ms, color 250ms",
-  textTransform: "uppercase",
-  letterSpacing: 1,
-  border: outline ? `2px solid ${colors.light}` : "none",
-  cursor: "pointer",
-  "&:hover": {
-    backgroundColor: colors[variant].dark,
-    color: outline ? colors[variant].base : undefined,
-    transition: "background-color 250ms, color 250ms",
-  },
-});
+interface IButtonLinkProps extends ILinkProps {
+  variant?: Variants;
+}
 
-const defaultProps: IButtonProps = {
-  variant: "primary",
-  outline: false,
+const getTheme = (variant: Variants) =>
+  `inline-block cursor-pointer bg-white hover:bg-neutral-200 text-neutral-800 font-semibold py-2 px-4 border border-neutral-400 rounded shadow`;
+
+export const Button: React.FC<IButtonProps> = ({
+  children,
+  className,
+  variant,
+  ...props
+}) => (
+  <button className={`${getTheme(variant)} ${className}`} {...props}>
+    {children}
+  </button>
+);
+
+Button.defaultProps = {
+  variant: Variants.primary,
 };
 
-export const ButtonWrapper = styled.div<IButtonProps>(styles);
-export const Button = styled.button<IButtonProps>(styles);
+export const ButtonLink: React.FC<IButtonLinkProps> = ({
+  className,
+  variant,
+  ...props
+}) => <Link {...props} className={`${getTheme(variant)} ${className}`} />;
 
-ButtonWrapper.defaultProps = defaultProps;
-Button.defaultProps = defaultProps;
+ButtonLink.defaultProps = {
+  variant: Variants.primary,
+};

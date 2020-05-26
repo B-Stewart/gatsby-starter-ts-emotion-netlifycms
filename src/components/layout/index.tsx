@@ -2,8 +2,9 @@ import "../../styles/main.css";
 
 import * as React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import Header from "../header";
+import { Header } from "../header";
 import { Footer } from "../footer";
+import { IoLogoGithub } from "react-icons/io";
 
 interface ILayoutQueryData {
   header: {
@@ -33,12 +34,19 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <>
       <Header
-        links={data.header.frontmatter.links.map((l) => ({
-          to: l.link,
-          name: l.name,
-        }))}
+        links={[
+          ...data.header.frontmatter.links.map((l) => ({
+            to: l.link,
+            name: l.name,
+          })),
+          {
+            to:
+              "https://github.com/B-Stewart/gatsby-starter-ts-emotion-netlifycms",
+            component: IoLogoGithub,
+          },
+        ]}
       />
-      <section>{children}</section>
+      <section className="z-0 relative">{children}</section>
       <Footer />
     </>
   );

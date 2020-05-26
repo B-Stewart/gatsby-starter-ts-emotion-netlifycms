@@ -1,24 +1,23 @@
 import * as React from "react";
-import { InterpolationWithTheme } from "@emotion/core";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as GatsbyLink, navigateTo } from "gatsby";
 import { OutboundLink } from "gatsby-plugin-google-analytics";
 
-export const isInternalLink = link => {
+export const isInternalLink = (link) => {
   return /^\/(?!\/)/.test(link);
 };
 
 export interface ILinkProps {
   to: string;
-  cssStyle?: InterpolationWithTheme<any>;
   onClick?: () => any;
+  className?: string;
 }
 
 export const Link: React.SFC<ILinkProps> = ({
   children,
   to,
-  cssStyle,
   onClick,
+  className,
 }) => {
   const isScroll = to.includes("#");
   if (isScroll) {
@@ -29,7 +28,7 @@ export const Link: React.SFC<ILinkProps> = ({
     )
       return (
         <a
-          css={cssStyle}
+          className={className}
           onClick={() => {
             navigateTo(to);
             onClick && onClick();
@@ -41,7 +40,7 @@ export const Link: React.SFC<ILinkProps> = ({
 
     return (
       <ScrollLink
-        css={cssStyle}
+        className={className}
         to={to.replace("#", "").replace("/", "")}
         smooth={true}
         offset={-60}
@@ -54,7 +53,7 @@ export const Link: React.SFC<ILinkProps> = ({
     if (isInternalLink(to)) {
       return (
         <GatsbyLink
-          css={cssStyle}
+          className={className}
           to={to}
           onClick={onClick}
           // TODO: This doesn't work great on homepage
@@ -70,7 +69,7 @@ export const Link: React.SFC<ILinkProps> = ({
     } else {
       return (
         <OutboundLink
-          css={cssStyle}
+          className={className}
           href={to}
           target="_blank"
           onClick={onClick}

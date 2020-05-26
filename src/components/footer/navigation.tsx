@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { PageWrapper } from "../page-wrapper";
 import { colors, mediaQuery } from "../../utilities";
 import { DangerouslySetInnerHtml } from "../dangerously-set-inner-html";
+import { Link } from "../link";
 
 interface INavigationProps {
   navigationBlocks: {
@@ -51,19 +52,13 @@ export const Navigation: React.SFC<INavigationProps> = ({
   navigationBlocks,
 }) => {
   return (
-    <NavigationWrapper>
-      <PageWrapper css={{ position: "relative" }}>
-        <FlexWrapper>
-          {navigationBlocks.map((nb, i) => (
-            <FlexItem key={i}>
-              <MenuHeader>{nb.title}</MenuHeader>
-              <MenuItem>
-                <DangerouslySetInnerHtml>{nb.content}</DangerouslySetInnerHtml>
-              </MenuItem>
-            </FlexItem>
-          ))}
-        </FlexWrapper>
-      </PageWrapper>
-    </NavigationWrapper>
+    <div className="bg-primary-600 py-4">
+      <div className="container">
+        Created by{" "}
+        <Link to="https://swiftsoulinteractive.com">
+          Swift Soul Interactive
+        </Link>
+      </div>
+    </div>
   );
 };

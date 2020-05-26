@@ -11,7 +11,7 @@ export interface INotFoundPage extends PageProps {
 const NotFoundPage: React.FC<INotFoundPage> = ({ data }) => (
   <Layout>
     <SEO title={data.content.frontmatter.title} />
-    <PageWrapper className="py-16 text-center">
+    <PageWrapper className="text-center">
       <h1>{data.content.frontmatter.title}</h1>
       <p>{data.content.frontmatter.subtitle}</p>
     </PageWrapper>

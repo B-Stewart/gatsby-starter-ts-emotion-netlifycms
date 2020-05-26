@@ -1,28 +1,12 @@
 import * as React from "react";
 import { graphql, PageProps } from "gatsby";
-import styled from "@emotion/styled";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 import { HeroVideo } from "../components/hero-video";
-import { ContentFade } from "../components/content-fade";
-import { IChildImageSharpFluid, IFileUpload } from "../interfaces";
+import { IChildImageSharpFluid, IFileUpload, Variants } from "../interfaces";
 import GatsbyImage from "gatsby-image";
-import { FlexBlocks, FlexBlock } from "../components/flex-blocks";
-import { IconBlock } from "../components/icon-block";
 import { PageWrapper } from "../components/page-wrapper";
-import { ButtonWrapper } from "../components/button";
-import { Link } from "../components/link";
-
-const FlexBlockPadded = styled(FlexBlock)({
-  paddingLeft: 8,
-  paddingRight: 8,
-  "&:first-of-type": {
-    paddingLeft: 0,
-  },
-  "&:last-child": {
-    paddingRight: 0,
-  },
-});
+import { ButtonLink } from "../components/button";
 
 export interface IIndexPageProps extends PageProps {
   data: IIndexPageQuery;
@@ -37,27 +21,24 @@ const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
         videoSrc={data.content.frontmatter.heroVideo.publicURL}
         title={data.content.frontmatter.title}
       />
-      <ContentFade
-        imgSrc={data.content.frontmatter.teamImg.childImageSharp.fluid.src}
-      >
-        <h3>{data.content.frontmatter.teamTitle}</h3>
-        <p>{data.content.frontmatter.teamContent}</p>
-        <ButtonWrapper variant="primary">
-          <Link to="#contact">{data.content.frontmatter.teamButton}</Link>
-        </ButtonWrapper>
-      </ContentFade>
       <PageWrapper id="about" className="container">
-        <h3 className="text-center">{data.content.frontmatter.aboutTitle}</h3>
-        <p className="text-lg text-center">
-          {data.content.frontmatter.aboutContent}
-        </p>
-        <FlexBlocks>
+        <div className="text-center pb-5">
+          <h1 className="text-4xl">{data.content.frontmatter.teamTitle}</h1>
+          <p className="text-lg">{data.content.frontmatter.teamContent}</p>
+          <ButtonLink variant={Variants.primary} to="#contact" className="my-5">
+            {data.content.frontmatter.teamButton}
+          </ButtonLink>
+        </div>
+        <div className="md:flex">
           {data.content.frontmatter.iconBlocks.map((ib, i) => (
-            <FlexBlockPadded key={i}>
-              <IconBlock title={ib.title} content={ib.content} />
-            </FlexBlockPadded>
+            <div key={i} className="mb-4 md:mb-0 md:mr-4 md:last:mr-0">
+              <div className="uppercase text-lg font-semibold mb-2">
+                {ib.title}
+              </div>
+              <p>{ib.content}</p>
+            </div>
           ))}
-        </FlexBlocks>
+        </div>
       </PageWrapper>
       <GatsbyImage
         sizes={data.content.frontmatter.bannerImg.childImageSharp.fluid}
