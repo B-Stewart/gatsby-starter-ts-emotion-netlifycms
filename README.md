@@ -1,6 +1,6 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d99d8c8d-62af-4761-9bf2-c2f317e7705e/deploy-status)](https://app.netlify.com/sites/gatsby-starter-ts-emotion-netlifycms/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d99d8c8d-62af-4761-9bf2-c2f317e7705e/deploy-status)](https://app.netlify.com/sites/gatsby-starter-typescript-tailwind-netlifycms/deploys)
 
-# Gatsby Starter TypeScript Emotion and Netlify CMS
+# Gatsby Starter for TypeScript, TailwindCSS, and Netlify CMS
 
 ## Getting Started
 
@@ -34,7 +34,6 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 
 - Clean up original TODO
 - Clean Up Readme
-- Migrate to tailwind instead of emotion
 - Move all theme styles to CMS data
 - Do all source code todo's
 - Consider consolidating 404 and thanks page to a generic page "type" with title / subtitle
