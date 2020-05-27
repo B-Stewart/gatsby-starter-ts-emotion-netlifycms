@@ -5,7 +5,7 @@ export const PageWrapper: React.FC<React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLElement>,
   HTMLElement
 >> = ({ children, className, ...props }) => (
-  <section className={`py-16 ${className}`} {...props}>
+  <section className={`py-8 ${className}`} {...props}>
     {children}
   </section>
 );

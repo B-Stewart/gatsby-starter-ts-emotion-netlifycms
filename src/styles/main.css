@@ -16,10 +16,24 @@ body {
   @apply text-base;
 }
 
-.children-block > * {
-  display: block !important;
+a {
+  @apply underline;
+  @apply transition;
+  @apply duration-300;
+}
+
+a:hover {
+  @apply text-secondary-300;
 }
 
 @tailwind components;
 
 @tailwind utilities;
+
+.children-block > * {
+  display: block !important;
+}
+
+.flex-basis-0 {
+  flex-basis: 0;
+}

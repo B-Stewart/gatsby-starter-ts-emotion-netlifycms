@@ -1,51 +1,38 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { HeroBanner } from "../components/hero-banner";
 import kebabCase from "lodash.kebabcase";
 import { IChildImageSharpFluid } from "../interfaces";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 import { PageWrapper } from "../components/page-wrapper";
 import { Link } from "../components/link";
-import styled from "@emotion/styled";
 import { createSubArrays } from "../utilities";
+import { Hero } from "../components/hero";
 
 export interface ITagPageProps {
   data: ITagPageQuery;
 }
 
-const TagRow = styled.div({
-  display: "flex",
-});
-
-const Tag = styled.div({
-  flexBasis: 0,
-  flexGrow: 1,
-  margin: 16,
-  textAlign: "center",
-});
-
 const TagPage: React.SFC<ITagPageProps> = ({ data }) => {
   return (
     <Layout>
       <SEO title={data.content.frontmatter.title} />
-      <HeroBanner
-        backgroundImageSrc={
-          data.content.frontmatter.heroImg.childImageSharp.fluid.src
-        }
+      <Hero
+        imageSrc={data.content.frontmatter.heroImg.childImageSharp.fluid.src}
         title={data.content.frontmatter.title}
       />
-      <PageWrapper>
+      <PageWrapper className="container">
         {createSubArrays(3, data.tags.group).map((tags, i) => (
-          <TagRow key={i}>
+          <div className="block md:flex" key={i}>
             {tags.map((tag, j) => (
-              <Tag>
+              <div className="mb-4 md:mb-0 md:mr-4 p-4 flex-grow flex-basis-0 text-center">
+                {/* TODO: Could this just be a direct slug? */}
                 <Link to={`/tags/${kebabCase(tag.fieldValue)}`} key={j}>
                   {tag.fieldValue}
                 </Link>
-              </Tag>
+              </div>
             ))}
-          </TagRow>
+          </div>
         ))}
       </PageWrapper>
     </Layout>

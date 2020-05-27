@@ -37,7 +37,12 @@ export const ButtonLink: React.FC<IButtonLinkProps> = ({
   className,
   variant,
   ...props
-}) => <Link {...props} className={`${getTheme(variant)} ${className}`} />;
+}) => (
+  <Link
+    {...props}
+    className={`no-underline ${getTheme(variant)} ${className}`}
+  />
+);
 
 ButtonLink.defaultProps = {
   variant: Variants.primary,

@@ -1,5 +1,4 @@
 import * as React from "react";
-import styled from "@emotion/styled";
 import PigeonMap from "pigeon-maps";
 import Marker from "pigeon-marker";
 

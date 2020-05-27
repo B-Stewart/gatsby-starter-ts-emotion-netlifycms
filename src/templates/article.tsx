@@ -4,21 +4,46 @@ import { graphql, Link } from "gatsby";
 import { Layout } from "../components/layout";
 import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
 import { SEO } from "../components/seo";
-import { HeroBanner } from "../components/hero-banner";
 import { PageWrapper } from "../components/page-wrapper";
 import { IChildImageSharpFluid } from "../interfaces";
-import styled from "@emotion/styled";
+import { Hero } from "../components/hero";
 
-const TagWrapper = styled.div({
-  display: "block",
-  marginTop: "4rem",
-});
+const ArticleTemplate: React.FC<IArticleTemplate> = ({ data }) => {
+  return (
+    <Layout>
+      <SEO title="Blogs" />
+      <Hero
+        imageSrc={
+          data.markdownRemark.frontmatter.featuredImage.childImageSharp.fluid
+            .src
+        }
+        title={data.markdownRemark.frontmatter.title}
+        overlay
+      />
+      <PageWrapper className="container">
+        <h2 className="text-2xl text-center">
+          {data.markdownRemark.frontmatter.description}
+        </h2>
+        <DangerouslySetInnerHtml>
+          {data.markdownRemark.html}
+        </DangerouslySetInnerHtml>
+        {data.markdownRemark.frontmatter.tags &&
+        data.markdownRemark.frontmatter.tags.length ? (
+          <div className="mt-16">
+            <h2 className="text-2xl">Tags: </h2>
+            {data.markdownRemark.frontmatter.tags.map((tag) => (
+              <div className="inline-block mr-1 last:mr-0" key={tag + `tag`}>
+                <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </PageWrapper>
+    </Layout>
+  );
+};
 
-const Tag = styled.div({
-  display: "inline-block",
-  marginLeft: 4,
-  marginRight: 4,
-});
+export default ArticleTemplate;
 
 interface IArticleTemplate {
   data: {
@@ -35,40 +60,6 @@ interface IArticleTemplate {
     };
   };
 }
-
-const ArticleTemplate: React.SFC<IArticleTemplate> = ({ data }) => {
-  return (
-    <Layout>
-      <SEO title="Blogs" />
-      <HeroBanner
-        backgroundImageSrc={
-          data.markdownRemark.frontmatter.featuredImage.childImageSharp.fluid
-            .src
-        }
-        title={data.markdownRemark.frontmatter.title}
-      />
-      <PageWrapper>
-        <h3>{data.markdownRemark.frontmatter.description}</h3>
-        <DangerouslySetInnerHtml>
-          {data.markdownRemark.html}
-        </DangerouslySetInnerHtml>
-        {data.markdownRemark.frontmatter.tags &&
-        data.markdownRemark.frontmatter.tags.length ? (
-          <TagWrapper>
-            <h4>Tags: </h4>
-            {data.markdownRemark.frontmatter.tags.map((tag) => (
-              <Tag key={tag + `tag`}>
-                <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-              </Tag>
-            ))}
-          </TagWrapper>
-        ) : null}
-      </PageWrapper>
-    </Layout>
-  );
-};
-
-export default ArticleTemplate;
 
 export const pageQuery = graphql`
   query BlogArticleByID($id: String!) {

@@ -1,41 +1,20 @@
 import * as React from "react";
-import { Helmet } from "react-helmet";
-import { Link, graphql } from "gatsby";
+import { Link, graphql, PageProps } from "gatsby";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { PageWrapper } from "../components/page-wrapper";
-import { createSubArrays } from "../utilities";
 import { ArticleRow } from "../components/article-row";
+import { IChildImageSharpFluid } from "../interfaces";
+import { PageWrapper } from "../components/page-wrapper";
 
-interface ITag {
-  data: {
-    allMarkdownRemark: {
-      edges: {
-        node: {
-          fields: {
-            slug: string;
-          };
-          frontmatter: {
-            title: string;
-            featuredImage: IChildImageSharpFluid;
-          };
-        };
-      }[];
-      totalCount: number;
-    };
+interface ITag extends PageProps {
+  data: ITagQuery;
+  // TODO: Find out why this isn't strongly typed?
+  pageContext: {
+    tag: string;
   };
-  pageContext: any;
 }
 
-const Tag: React.SFC<ITag> = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges;
-  const postLinks = posts.map((post) => (
-    <li key={post.node.fields.slug}>
-      <Link to={post.node.fields.slug}>
-        <h2 className="is-size-2">{post.node.frontmatter.title}</h2>
-      </Link>
-    </li>
-  ));
+const Tag: React.FC<ITag> = ({ data, pageContext }) => {
   const tag = pageContext.tag;
   const totalCount = data.allMarkdownRemark.totalCount;
   const tagHeader = `${totalCount} post${
@@ -45,11 +24,11 @@ const Tag: React.SFC<ITag> = ({ data, pageContext }) => {
   return (
     <Layout>
       <SEO title={tag} />
-      <PageWrapper>
-        <div>
+      <PageWrapper className="container">
+        <h1 className="text-4xl text-center">{tagHeader}</h1>
+        <p className="text-center mb-8">
           <Link to="/tags/">Browse all tags</Link>
-        </div>
-        <h1>{tagHeader}</h1>
+        </p>
         <ArticleRow edges={data.allMarkdownRemark.edges} />
       </PageWrapper>
     </Layout>
@@ -57,6 +36,23 @@ const Tag: React.SFC<ITag> = ({ data, pageContext }) => {
 };
 
 export default Tag;
+
+interface ITagQuery {
+  allMarkdownRemark: {
+    edges: {
+      node: {
+        fields: {
+          slug: string;
+        };
+        frontmatter: {
+          title: string;
+          featuredImage: IChildImageSharpFluid;
+        };
+      };
+    }[];
+    totalCount: number;
+  };
+}
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {

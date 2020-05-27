@@ -58,10 +58,9 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyzer",
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
       options: {
-        analyzerPort: 3007,
-        production: true,
+        analyzerMode: "static",
       },
     },
     `gatsby-plugin-netlify-cms-paths`,
@@ -86,7 +85,6 @@ module.exports = {
     },
     "gatsby-plugin-svgr",
     `gatsby-plugin-typescript`,
-    `gatsby-plugin-emotion`,
     `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-netlify`,
   ],

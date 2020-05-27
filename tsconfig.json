@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["@emotion/core"],
     "noEmit": true,
     "lib": ["dom", "ESNext"],
     "jsx": "react"

@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+// TODO: Clean Up file
+
 // Adding remark to md* fields in .md files
 // Need to `yarn add remark remark-html`, then include the following code in
 const remark = require("remark");
@@ -23,7 +25,7 @@ const addFrontmatterMd = (node, actions) => {
   if (node.frontmatter) {
     var nodeKeys = Object.keys(node.frontmatter);
     // Get child keys
-    nodeKeys.forEach(key => {
+    nodeKeys.forEach((key) => {
       // In array
       if (Array.isArray(node.frontmatter[key])) {
         node.frontmatter[key].forEach((v, i) => {
@@ -53,8 +55,8 @@ const addFrontmatterMd = (node, actions) => {
 
 const addFrontmatterMdToNode = (keys, parentObj) => {
   keys
-    .filter(key => key.startsWith("md"))
-    .forEach(key => {
+    .filter((key) => key.startsWith("md"))
+    .forEach((key) => {
       parentObj[key] = remark()
         .use(remarkHTML)
         .processSync(parentObj[key])
@@ -85,15 +87,15 @@ const createBlogPages = (actions, graphql) => {
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
+      result.errors.forEach((e) => console.error(e.toString()));
       return Promise.reject(result.errors);
     }
 
     const posts = result.data.allMarkdownRemark.edges;
 
-    posts.forEach(edge => {
+    posts.forEach((edge) => {
       const id = edge.node.id;
       createPage({
         path: edge.node.fields.slug,
@@ -109,7 +111,7 @@ const createBlogPages = (actions, graphql) => {
     // Tag pages:
     let tags = [];
     // Iterate through each post, putting all found tags into `tags`
-    posts.forEach(edge => {
+    posts.forEach((edge) => {
       if (_.get(edge, `node.frontmatter.tags`)) {
         tags = tags.concat(edge.node.frontmatter.tags);
       }
@@ -118,7 +120,7 @@ const createBlogPages = (actions, graphql) => {
     tags = _.uniq(tags);
 
     // Make tag pages
-    tags.forEach(tag => {
+    tags.forEach((tag) => {
       const tagPath = `/tags/${_.kebabCase(tag)}/`;
 
       createPage({

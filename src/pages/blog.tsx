@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { HeroBanner } from "../components/hero-banner";
+import { Hero } from "../components/hero";
 import { IChildImageSharpFluid } from "../interfaces";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
@@ -15,13 +15,12 @@ const BlogPage: React.SFC<IBlogPageProps> = ({ data }) => {
   return (
     <Layout>
       <SEO title="Blogs" />
-      <HeroBanner
-        backgroundImageSrc={
-          data.content.frontmatter.heroImg.childImageSharp.fluid.src
-        }
+      <Hero
+        imageSrc={data.content.frontmatter.heroImg.childImageSharp.fluid.src}
         title={data.content.frontmatter.title}
+        overlay
       />
-      <PageWrapper>
+      <PageWrapper className="container">
         <ArticleRow edges={data.articles.edges} />
       </PageWrapper>
     </Layout>

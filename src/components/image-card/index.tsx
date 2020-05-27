@@ -1,7 +1,5 @@
 import * as React from "react";
-import styled from "@emotion/styled";
 import { IChildImageSharpFluid } from "../../interfaces";
-import { colors } from "../../utilities";
 import GatsbyImage from "gatsby-image";
 import { Link } from "../link";
 
@@ -9,46 +7,23 @@ interface IImageCardProps {
   fluidImage: IChildImageSharpFluid;
   title: string;
   to: string;
+  className?: string;
 }
 
-const CardTitle = styled.div({
-  padding: 16,
-  transition: "background-color .5s, color .25s",
-});
-
-const Card = styled.div({
-  display: "block",
-  margin: 16,
-  flexBasis: 0,
-  flexGrow: 1,
-  transition: "box-shadow .5s",
-  "&:first-child": {
-    marginLeft: 0,
-  },
-  "&:last-child": {
-    marginRight: 0,
-  },
-  "&:hover": {
-    boxShadow: `3px 3px 3px ${colors.neutral.dark}`,
-    // TODO: When https://github.com/emotion-js/emotion/issues/1275 is fixed
-    [CardTitle as any]: {
-      backgroundColor: colors.secondary.light,
-      color: colors.light,
-    },
-  },
-});
-
-export const ImageCard: React.SFC<IImageCardProps> = ({
+export const ImageCard: React.FC<IImageCardProps> = ({
   fluidImage,
   to,
   title,
+  className,
 }) => (
-  <Card>
-    <Link to={to}>
+  <div
+    className={`hover:shadow-xl transition duration-500 ease-in-out group hover:bg-secondary-300 ${className}`}
+  >
+    <Link to={to} className="no-underline">
       <GatsbyImage fluid={fluidImage.childImageSharp.fluid} />
-      <CardTitle>{title}</CardTitle>
+      <div className="p-4 group-hover:text-white">{title}</div>
     </Link>
-  </Card>
+  </div>
 );
 
 ImageCard.displayName = "ImageCard";

@@ -20,6 +20,22 @@ module.exports = {
       padding: "1rem",
     },
   },
-  variants: {},
+  // Enable all variants because we strip unused anyways
+  variants: [
+    "responsive",
+    "group-hover",
+    "group-focus",
+    "focus-within",
+    "first",
+    "last",
+    "odd",
+    "even",
+    "hover",
+    "focus",
+    "active",
+    "visited",
+    "disabled",
+  ],
+  purge: ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.js"],
   plugins: [],
 };

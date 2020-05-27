@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql, PageProps } from "gatsby";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { HeroVideo } from "../components/hero-video";
+import { Hero } from "../components/hero";
 import { IChildImageSharpFluid, IFileUpload, Variants } from "../interfaces";
 import GatsbyImage from "gatsby-image";
 import { PageWrapper } from "../components/page-wrapper";
@@ -17,9 +17,10 @@ const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
     <Layout>
       {/* TODO: Move title to netlify, maybe have global seo specific titles? */}
       <SEO title="Home" />
-      <HeroVideo
+      <Hero
         videoSrc={data.content.frontmatter.heroVideo.publicURL}
         title={data.content.frontmatter.title}
+        overlay
       />
       <PageWrapper id="about" className="container">
         <div className="text-center pb-5">
@@ -42,7 +43,7 @@ const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
       </PageWrapper>
       <GatsbyImage
         sizes={data.content.frontmatter.bannerImg.childImageSharp.fluid}
-        css={{
+        style={{
           maxHeight: 400,
         }}
       />

@@ -1,5 +1,4 @@
 import * as React from "react";
-import styled from "@emotion/styled";
 import { IChildImageSharpFluid } from "../../interfaces";
 import { createSubArrays } from "../../utilities";
 import { ImageCard } from "../image-card";
@@ -18,23 +17,21 @@ interface IArticleRowProps {
   }[];
 }
 
-const ArticleRowWrapper = styled.div({
-  display: "flex",
-});
-
-export const ArticleRow: React.SFC<IArticleRowProps> = ({ edges }) => (
+export const ArticleRow: React.FC<IArticleRowProps> = ({ edges }) => (
   <>
-    {createSubArrays(2, edges).map((ar, i) => (
-      <ArticleRowWrapper key={i}>
+    {/* TODO: Document what the heck this is */}
+    {createSubArrays(4, edges).map((ar, i) => (
+      <div className="md:flex flex-none" key={i}>
         {ar.map((edge, j) => (
           <ImageCard
             fluidImage={edge.node.frontmatter.featuredImage}
             title={edge.node.frontmatter.title}
             to={edge.node.fields.slug}
             key={j}
+            className="mr-4 last:mr-0 mb-4 md:mb-0 flex-grow flex-basis-0"
           />
         ))}
-      </ArticleRowWrapper>
+      </div>
     ))}
   </>
 );
