@@ -1,4 +1,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d99d8c8d-62af-4761-9bf2-c2f317e7705e/deploy-status)](https://app.netlify.com/sites/gatsby-starter-typescript-tailwind-netlifycms/deploys)
+![Lighthouse Accessibility](./lighthouse-badges/lighthouse_accessibility.svg)
+![Lighthouse Best Practices](./lighthouse-badges/lighthouse_best-practices.svg)
+![Lighthouse Performance](./lighthouse-badges/lighthouse_performance.svg)
+![Lighthouse PWA](./lighthouse-badges/lighthouse_pwa.svg)
+![Lighthouse SEO](./lighthouse-badges/lighthouse_seo.svg)
 
 # Gatsby Starter for TypeScript, TailwindCSS, and Netlify CMS
 
@@ -48,3 +53,4 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - unit tests?
 - describe dependencies and usefulness
 - Templatize it for plug and play
+- Figure out why lighthouse doesn't work with locally installed npx

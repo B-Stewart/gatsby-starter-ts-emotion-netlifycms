@@ -19,6 +19,8 @@
     "clean": "npx gatsby clean",
     "dev:lambda": "npx netlify-lambda serve src/lambda",
     "build:lambda": "npx netlify-lambda build src/lambda",
+    "update:badges": "npx lighthouse-badges --urls https://gatsby-starter-typescript-tailwind-netlifycms.netlify.app/ -o lighthouse-badges -b popout",
+    "start:netlifycms": "netlify-cms-proxy-server",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "repository": {
@@ -69,6 +71,7 @@
     "lodash": "4.17.15",
     "netlify-lambda": "1.6.3",
     "tailwindcss": "1.4.6",
-    "autoprefixer": "9.8.0"
+    "autoprefixer": "9.8.0",
+    "netlify-cms-proxy-server": "1.2.7"
   }
 }
