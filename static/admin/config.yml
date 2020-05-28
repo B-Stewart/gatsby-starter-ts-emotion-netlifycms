@@ -4,6 +4,7 @@ backend:
   accept_roles: #optional - accepts all users if left out
     - admin
 
+local_backend: true # BETA: allows for local git repo vs the hosted version
 media_folder: "static/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
@@ -30,7 +31,13 @@ collections:
           required: false,
         }
       - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - {
+          label: "Tags",
+          name: "tags",
+          widget: "list",
+          required: false,
+          hint: "Comma Seperated",
+        }
   - label: "Pages"
     name: "pages"
     files:
@@ -46,27 +53,18 @@ collections:
             }
           - { label: Title, name: title, widget: string }
           - { label: Hero Video, name: heroVideo, widget: file }
-          - { label: Team Title, name: teamTitle, widget: string }
-          - { label: Team Content, name: teamContent, widget: text }
-          - { label: Team Button, name: teamButton, widget: string }
-          - label: "Team Image"
-            name: "teamImg"
-            widget: "image"
-            allow_multiple: false
-            required: false
+          - { label: Body, name: body, widget: markdown }
           - label: "Banner Image"
             name: "bannerImg"
             widget: "image"
             allow_multiple: false
             required: false
-          - label: "Icon Blocks"
-            name: "iconBlocks"
+          - label: "Highlights"
+            name: "highlights"
             widget: "list"
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Content, name: content, widget: string }
-          - { label: "About Title", name: aboutTitle, widget: string }
-          - { label: "About Content", name: aboutContent, widget: text }
       - label: "Blog Page"
         name: "blogPage"
         file: "cms/pages/blog.md"
@@ -120,8 +118,6 @@ collections:
               widget: hidden,
               default: "header",
             }
-          - { label: Banner Content, name: bannerContent, widget: string }
-          - { label: Banner Button, name: bannerBtn, widget: string }
           - label: "Links"
             name: "links"
             widget: "list"
@@ -141,14 +137,9 @@ collections:
           - { label: Contact Title, name: contactTitle, widget: string }
           - { label: Contact Content, name: contactContent, widget: text }
           - { label: Visit Title, name: visitTitle, widget: string }
-          - label: "Contact Image"
-            name: "contactImg"
-            widget: "image"
-            allow_multiple: false
-            required: false
-          - label: "Info"
-            name: "info"
-            widget: "list"
-            fields:
-              - { label: Title, name: title, widget: string }
-              - { label: Content, name: mdContent, widget: markdown }
+          - {
+              label: "Attribution",
+              name: "mdAttribution",
+              widget: "markdown",
+              minimal: true,
+            }

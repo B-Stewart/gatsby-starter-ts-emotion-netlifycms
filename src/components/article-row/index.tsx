@@ -2,6 +2,7 @@ import * as React from "react";
 import { IChildImageSharpFluid } from "../../interfaces";
 import { createSubArrays } from "../../utilities";
 import { ImageCard } from "../image-card";
+import { graphql } from "gatsby";
 
 interface IArticleRowProps {
   edges: {
@@ -37,3 +38,35 @@ export const ArticleRow: React.FC<IArticleRowProps> = ({ edges }) => (
 );
 
 ArticleRow.displayName = "ArticleRow";
+
+export interface IArticleRowQuery {
+  node: {
+    fields: {
+      slug: string;
+    };
+    frontmatter: {
+      title: string;
+      featuredImage: IChildImageSharpFluid;
+    };
+  };
+}
+
+export const query = graphql`
+  fragment ArticleRowQuery on MarkdownRemarkEdge {
+    node {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        featuredImage {
+          childImageSharp {
+            fluid(maxWidth: 1000, quality: 80) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`;

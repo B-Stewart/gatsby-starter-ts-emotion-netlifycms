@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Button } from "../button";
-import { IChildImageSharpFluid, Variants } from "../../interfaces";
+import { Variants } from "../../interfaces";
 
 interface IContactProps {
-  image: IChildImageSharpFluid;
   title: string;
   description: string;
 }

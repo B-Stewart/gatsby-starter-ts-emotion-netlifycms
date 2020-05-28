@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-ts-emotion-netlifycms",
+  "name": "gatsby-starter-typescript-tailwindcss-netlifycms",
   "private": true,
   "version": "1.0.0",
   "author": "Brayden Stewart <bstewart@swiftsoulinteractive.com>",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/B-Stewart/gatsby-starter-typescript-tailwindcss-netlifycms"
   },
   "browserslist": [
     ">0.25%",

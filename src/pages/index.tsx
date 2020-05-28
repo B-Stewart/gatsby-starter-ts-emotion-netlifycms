@@ -7,31 +7,25 @@ import { IChildImageSharpFluid, IFileUpload, Variants } from "../interfaces";
 import GatsbyImage from "gatsby-image";
 import { PageWrapper } from "../components/page-wrapper";
 import { ButtonLink } from "../components/button";
+import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
 
 export interface IIndexPageProps extends PageProps {
   data: IIndexPageQuery;
 }
 
 const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
+  const { heroVideo, title, highlights, bannerImg } = data.content.frontmatter;
+
   return (
     <Layout>
-      {/* TODO: Move title to netlify, maybe have global seo specific titles? */}
-      <SEO title="Home" />
-      <Hero
-        videoSrc={data.content.frontmatter.heroVideo.publicURL}
-        title={data.content.frontmatter.title}
-        overlay
-      />
+      <SEO title={title} />
+      <Hero videoSrc={heroVideo.publicURL} title={title} overlay />
       <PageWrapper id="about" className="container">
-        <div className="text-center pb-5">
-          <h1 className="text-4xl">{data.content.frontmatter.teamTitle}</h1>
-          <p className="text-lg">{data.content.frontmatter.teamContent}</p>
-          <ButtonLink variant={Variants.primary} to="#contact" className="my-5">
-            {data.content.frontmatter.teamButton}
-          </ButtonLink>
+        <div className="pb-5 text-center">
+          <DangerouslySetInnerHtml>{data.content.html}</DangerouslySetInnerHtml>
         </div>
         <div className="md:flex">
-          {data.content.frontmatter.iconBlocks.map((ib, i) => (
+          {highlights.map((ib, i) => (
             <div key={i} className="mb-4 md:mb-0 md:mr-4 md:last:mr-0">
               <div className="uppercase text-lg font-semibold mb-2">
                 {ib.title}
@@ -42,7 +36,7 @@ const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
         </div>
       </PageWrapper>
       <GatsbyImage
-        sizes={data.content.frontmatter.bannerImg.childImageSharp.fluid}
+        sizes={bannerImg.childImageSharp.fluid}
         style={{
           maxHeight: 400,
         }}
@@ -58,16 +52,11 @@ interface IIndexPageQuery {
     publicURL: string;
   };
   content: {
+    html: string;
     frontmatter: {
       title: string;
-      teamTitle: string;
-      teamContent: string;
-      teamButton: string;
-      teamImg: IChildImageSharpFluid;
       bannerImg: IChildImageSharpFluid;
-      iconBlocks: { content: string; title: string }[];
-      aboutTitle: string;
-      aboutContent: string;
+      highlights: { content: string; title: string }[];
       heroVideo: IFileUpload;
     };
   };
@@ -76,18 +65,9 @@ interface IIndexPageQuery {
 export const query = graphql`
   query IndexPageQuery {
     content: markdownRemark(frontmatter: { templateKey: { eq: "home-page" } }) {
+      html
       frontmatter {
         title
-        teamTitle
-        teamContent
-        teamButton
-        teamImg {
-          childImageSharp {
-            fluid(maxWidth: 500, quality: 85) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         bannerImg {
           childImageSharp {
             fluid(maxWidth: 2000, quality: 85) {
@@ -95,12 +75,10 @@ export const query = graphql`
             }
           }
         }
-        iconBlocks {
+        highlights {
           content
           title
         }
-        aboutTitle
-        aboutContent
         heroVideo {
           publicURL
         }

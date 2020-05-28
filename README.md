@@ -13,15 +13,13 @@ $ npm start
 
 Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting.
 
-## Dependencies
+## Dependency Notes
 
-- CLSX (classnames alternative, tiny);
+- [CLSX](https://github.com/lukeed/clsx) - Helps with logic heavy construction of class attributes for css.
 
 # TODO:
 
-- Move Article Row Queries to partial queries to share logic
 - Better way to add icons to header links
-- Use Background Video / Image Web components
 - Move Logo to CMS
 - Move Favicon to CMS
 - Move More Content to CMS
@@ -32,6 +30,9 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 
 # TODO 2020:
 
+- Future blog publishes
+- Test form
+- Swap googlefonts with typeface
 - Clean up original TODO
 - Clean Up Readme
 - Move all theme styles to CMS data
@@ -46,3 +47,4 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - storybook?
 - unit tests?
 - describe dependencies and usefulness
+- Templatize it for plug and play

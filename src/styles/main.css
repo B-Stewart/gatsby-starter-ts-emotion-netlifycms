@@ -11,6 +11,30 @@ h6 {
   color: theme("colors.primary.600");
 }
 
+h1 {
+  @apply text-4xl;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg;
+}
+
+h6 {
+  @apply text-base;
+}
+
 body {
   @apply font-body;
   @apply text-base;
@@ -29,6 +53,28 @@ a:hover {
 @tailwind components;
 
 @tailwind utilities;
+
+.btn {
+  @apply inline-block;
+  @apply cursor-pointer;
+  @apply bg-white;
+  @apply text-neutral-800;
+  @apply font-semibold;
+  @apply py-2;
+  @apply px-4;
+  @apply border;
+  @apply border-neutral-400;
+  @apply rounded;
+  @apply shadow;
+}
+
+.btn:hover {
+  @apply bg-neutral-200;
+}
+
+a.btn {
+  @apply no-underline;
+}
 
 .children-block > * {
   display: block !important;

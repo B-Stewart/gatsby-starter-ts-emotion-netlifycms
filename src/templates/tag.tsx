@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, graphql, PageProps } from "gatsby";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { ArticleRow } from "../components/article-row";
+import { ArticleRow, IArticleRowQuery } from "../components/article-row";
 import { IChildImageSharpFluid } from "../interfaces";
 import { PageWrapper } from "../components/page-wrapper";
 
@@ -39,17 +39,7 @@ export default Tag;
 
 interface ITagQuery {
   allMarkdownRemark: {
-    edges: {
-      node: {
-        fields: {
-          slug: string;
-        };
-        frontmatter: {
-          title: string;
-          featuredImage: IChildImageSharpFluid;
-        };
-      };
-    }[];
+    edges: IArticleRowQuery[];
     totalCount: number;
   };
 }
@@ -67,21 +57,7 @@ export const tagPageQuery = graphql`
     ) {
       totalCount
       edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            featuredImage {
-              childImageSharp {
-                fluid(maxWidth: 1000, quality: 80) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
+        ...ArticleRowQuery
       }
     }
   }

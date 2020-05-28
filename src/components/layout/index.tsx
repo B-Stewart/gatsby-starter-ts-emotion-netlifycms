@@ -18,7 +18,11 @@ interface ILayoutQueryData {
 }
 
 export const Layout: React.FC = ({ children }) => {
-  const data: ILayoutQueryData = useStaticQuery(graphql`
+  const {
+    header: {
+      frontmatter: { links },
+    },
+  }: ILayoutQueryData = useStaticQuery(graphql`
     query LayoutQuery {
       header: markdownRemark(frontmatter: { templateKey: { eq: "header" } }) {
         frontmatter {
@@ -35,13 +39,13 @@ export const Layout: React.FC = ({ children }) => {
     <>
       <Header
         links={[
-          ...data.header.frontmatter.links.map((l) => ({
+          ...links.map((l) => ({
             to: l.link,
             name: l.name,
           })),
           {
             to:
-              "https://github.com/B-Stewart/gatsby-starter-ts-emotion-netlifycms",
+              "https://github.com/B-Stewart/gatsby-starter-typescript-tailwindcss-netlifycms",
             component: IoLogoGithub,
           },
         ]}

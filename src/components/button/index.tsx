@@ -15,8 +15,7 @@ interface IButtonLinkProps extends ILinkProps {
   variant?: Variants;
 }
 
-const getTheme = (variant: Variants) =>
-  `inline-block cursor-pointer bg-white hover:bg-neutral-200 text-neutral-800 font-semibold py-2 px-4 border border-neutral-400 rounded shadow`;
+const getTheme = (variant: Variants) => `btn`;
 
 export const Button: React.FC<IButtonProps> = ({
   children,
@@ -37,12 +36,7 @@ export const ButtonLink: React.FC<IButtonLinkProps> = ({
   className,
   variant,
   ...props
-}) => (
-  <Link
-    {...props}
-    className={`no-underline ${getTheme(variant)} ${className}`}
-  />
-);
+}) => <Link {...props} className={`${getTheme(variant)} ${className}`} />;
 
 ButtonLink.defaultProps = {
   variant: Variants.primary,
