@@ -13,7 +13,7 @@ const FormSubmissionPage: React.FC<IFormSubmissionPage> = ({ data }) => (
     <SEO title={data.content.frontmatter.title} />
     <PageWrapper className="text-center">
       <h1>{data.content.frontmatter.title}</h1>
-      <p>{data.content.frontmatter.subtitle}</p>
+      <div>{data.content.frontmatter.subtitle}</div>
     </PageWrapper>
   </Layout>
 );

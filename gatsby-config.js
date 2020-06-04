@@ -1,8 +1,4 @@
 module.exports = {
-  siteMetadata: {
-    title: `Gatsby Starter`,
-    description: `TODO: Fix this`,
-  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -85,7 +81,13 @@ module.exports = {
     },
     "gatsby-plugin-svgr",
     `gatsby-plugin-typescript`,
-    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        manualInit: true,
+        modulePath: `${__dirname}/src/cms/cms.ts`,
+      },
+    },
     `gatsby-plugin-netlify`,
   ],
 };

@@ -1,5 +1,4 @@
 import * as React from "react";
-import kebabCase from "lodash.kebabcase";
 import { graphql, Link } from "gatsby";
 import { Layout } from "../components/layout";
 import { DangerouslySetInnerHtml } from "../components/dangerously-set-inner-html";
@@ -9,31 +8,26 @@ import { IChildImageSharpFluid } from "../interfaces";
 import { Hero } from "../components/hero";
 
 const ArticleTemplate: React.FC<IArticleTemplate> = ({ data }) => {
+  const tags = data.markdownRemark.fields.tags;
+  const article = data.markdownRemark.frontmatter;
   return (
     <Layout>
-      <SEO title="Blogs" />
+      <SEO title={article.title} />
       <Hero
-        imageSrc={
-          data.markdownRemark.frontmatter.featuredImage.childImageSharp.fluid
-            .src
-        }
-        title={data.markdownRemark.frontmatter.title}
+        imageSrc={article.featuredImage.childImageSharp.fluid.src}
+        title={article.title}
         overlay
       />
       <PageWrapper className="container">
-        <h2 className="text-2xl text-center">
-          {data.markdownRemark.frontmatter.description}
-        </h2>
         <DangerouslySetInnerHtml>
           {data.markdownRemark.html}
         </DangerouslySetInnerHtml>
-        {data.markdownRemark.frontmatter.tags &&
-        data.markdownRemark.frontmatter.tags.length ? (
+        {tags?.length ? (
           <div className="mt-16">
             <h2 className="text-2xl">Tags: </h2>
-            {data.markdownRemark.frontmatter.tags.map((tag) => (
-              <div className="inline-block mr-1 last:mr-0" key={tag + `tag`}>
-                <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+            {tags.map((tag, i) => (
+              <div className="inline-block mr-1 last:mr-0" key={i}>
+                <Link to={tag.fields.slug}>{tag.frontmatter.title}</Link>
               </div>
             ))}
           </div>
@@ -49,7 +43,16 @@ interface IArticleTemplate {
   data: {
     markdownRemark: {
       html: string;
-      id: string;
+      fields: {
+        tags: {
+          fields: {
+            slug: string;
+          };
+          frontmatter: {
+            title: string;
+          };
+        }[];
+      };
       frontmatter: {
         content: string;
         description: string;
@@ -64,13 +67,21 @@ interface IArticleTemplate {
 export const pageQuery = graphql`
   query BlogArticleByID($id: String!) {
     markdownRemark(id: { eq: $id }) {
-      id
       html
+      fields {
+        tags {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+          }
+        }
+      }
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
         description
-        tags
         featuredImage {
           childImageSharp {
             fluid(maxWidth: 2000, quality: 80) {

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import kebabCase from "lodash.kebabcase";
 import { IChildImageSharpFluid } from "../interfaces";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
@@ -14,21 +13,18 @@ export interface ITagPageProps {
 }
 
 const TagPage: React.SFC<ITagPageProps> = ({ data }) => {
+  const { title, heroImg } = data.content.frontmatter;
   return (
     <Layout>
-      <SEO title={data.content.frontmatter.title} />
-      <Hero
-        imageSrc={data.content.frontmatter.heroImg.childImageSharp.fluid.src}
-        title={data.content.frontmatter.title}
-      />
+      <SEO title={title} />
+      <Hero imageSrc={heroImg.childImageSharp.fluid.src} title={title} />
       <PageWrapper className="container">
-        {createSubArrays(3, data.tags.group).map((tags, i) => (
+        {createSubArrays(3, data.tags.nodes).map((tags, i) => (
           <div className="block md:flex" key={i}>
             {tags.map((tag, j) => (
               <div className="mb-4 md:mb-0 md:mr-4 p-4 flex-grow flex-basis-0 text-center">
-                {/* TODO: Could this just be a direct slug? */}
-                <Link to={`/tags/${kebabCase(tag.fieldValue)}`} key={j}>
-                  {tag.fieldValue}
+                <Link to={tag.fields.slug} key={j}>
+                  {tag.frontmatter.title}
                 </Link>
               </div>
             ))}
@@ -49,20 +45,19 @@ interface ITagPageQuery {
     };
   };
   tags: {
-    group: {
-      fieldValue: string;
-      totalCount: number;
+    nodes: {
+      fields: {
+        slug: string;
+      };
+      frontmatter: {
+        title: string;
+      };
     }[];
   };
 }
 
 export const query = graphql`
   query TagsQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     content: markdownRemark(frontmatter: { templateKey: { eq: "tags-page" } }) {
       frontmatter {
         title
@@ -76,12 +71,15 @@ export const query = graphql`
       }
     }
     tags: allMarkdownRemark(
-      limit: 1000
-      filter: { frontmatter: { templateKey: { eq: "blog-article" } } }
+      filter: { frontmatter: { templateKey: { eq: "tags" } } }
     ) {
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
       }
     }
   }

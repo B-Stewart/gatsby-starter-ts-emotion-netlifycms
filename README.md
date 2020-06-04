@@ -24,24 +24,19 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 
 # TODO:
 
+- Evalute article description field / excerpt?
+- Verify blog styles / write example blogs
+- Have netlifycms start with start command
+- Swap googlefonts with typeface
 - Better way to add icons to header links
 - Move Logo to CMS
 - Move Favicon to CMS
 - Move More Content to CMS
-- Extract the Md Gatsby child markdown helper to plugin
 - Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
-- Cleanup gatsby-node (by packages?)
-- Fix production webpack analyzer to not just be cms
-
-# TODO 2020:
-
 - Future blog publishes
-- Test form
-- Swap googlefonts with typeface
-- Clean up original TODO
+- Work on TODOs
 - Clean Up Readme
 - Move all theme styles to CMS data
-- Do all source code todo's
 - Consider consolidating 404 and thanks page to a generic page "type" with title / subtitle
 - Consider moving layout to templates?
 - Add ESLint
@@ -49,8 +44,10 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - Bundle Optimization
 - Add Preact?
 - Do lighthouse checks
+- Optimize css dev changes, seem to make dev process hang on any css change
+- Improve preview
 - storybook?
 - unit tests?
 - describe dependencies and usefulness
 - Templatize it for plug and play
-- Figure out why lighthouse doesn't work with locally installed npx
+- Figure out why lighthouse badges doesn't work with locally installed npx

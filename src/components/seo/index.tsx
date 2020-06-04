@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
 
 export interface ISEOProps {
   description?: string;
@@ -10,16 +9,6 @@ export interface ISEOProps {
   title?: string;
 }
 
-interface ISEOQuery {
-  site: {
-    siteMetadata: {
-      title: string;
-      description: string;
-      author?: string; // TODO: Add field to data source
-    };
-  };
-}
-
 export const SEO: React.FC<ISEOProps> = ({
   description,
   lang,
@@ -27,19 +16,10 @@ export const SEO: React.FC<ISEOProps> = ({
   keywords,
   title,
 }) => {
-  // TODO: Add data to netlifycms instead of site meta data
-  const data: ISEOQuery = useStaticQuery(graphql`
-    query DefaultSEOQuery {
-      site {
-        siteMetadata {
-          title
-          description
-        }
-      }
-    }
-  `);
+  const metaDescription = description;
 
-  const metaDescription = description || data.site.siteMetadata.description;
+  // TODO: Add data to netlifycms instead of site meta data and statically query it
+  const siteTitle = "TypeScript TailwindCSS Netlify and GatsbyJS Starter";
 
   return (
     <Helmet
@@ -47,7 +27,7 @@ export const SEO: React.FC<ISEOProps> = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${data.site.siteMetadata.title}`}
+      titleTemplate={`%s | ${siteTitle}`}
       meta={[
         {
           name: `description`,
@@ -71,7 +51,7 @@ export const SEO: React.FC<ISEOProps> = ({
         },
         {
           name: `twitter:creator`,
-          content: data.site.siteMetadata.author || "",
+          content: "", //TODO: Author
         },
         {
           name: `twitter:title`,

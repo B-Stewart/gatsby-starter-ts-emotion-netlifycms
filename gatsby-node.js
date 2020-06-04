@@ -10,72 +10,54 @@ const { createFilePath } = require("gatsby-source-filesystem");
 const addFrontmatterMd = require("./plugins/gatsby-plugin-frontmatter-md");
 
 // Creates individual article / tag pages based on existing md files and templates
-const createBlogPages = (actions, graphql) => {
+const createTemplatePages = async (
+  actions,
+  graphql,
+  templateKey,
+  componentPath,
+) => {
   const { createPage } = actions;
 
-  return graphql(`
-    {
-      allMarkdownRemark(
-        filter: { frontmatter: { templateKey: { eq: "blog-article" } } }
-      ) {
-        edges {
-          node {
+  const { data, errors } = await graphql(`
+  {
+    allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "${templateKey}" } } }
+    ) {
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
             id
-            fields {
-              slug
-            }
-            frontmatter {
-              tags
-              templateKey
-            }
           }
         }
       }
     }
-  `).then((result) => {
-    if (result.errors) {
-      result.errors.forEach((e) => console.error(e.toString()));
-      return Promise.reject(result.errors);
-    }
+  }
+`);
+  if (errors) {
+    errors.forEach((e) => console.error(e.toString()));
+    throw new Error(errors);
+  }
 
-    const posts = result.data.allMarkdownRemark.edges;
+  const items = data.allMarkdownRemark.edges;
 
-    // Create Article Pages
-    posts.forEach((edge) => {
-      const id = edge.node.id;
-      createPage({
-        path: edge.node.fields.slug,
-        tags: edge.node.frontmatter.tags, // TODO: Why do I do this?
-        component: path.resolve(`src/templates/article.tsx`),
-        // additional data can be passed via context
-        context: {
-          id,
-        },
-      });
-    });
-
-    // Tag pages:
-    let tags = [];
-    // Iterate through each post, putting all found tags into `tags`
-    posts.forEach((edge) => {
-      if (_.get(edge, `node.frontmatter.tags`)) {
-        tags = tags.concat(edge.node.frontmatter.tags);
-      }
-    });
-    // Eliminate duplicate tags
-    tags = _.uniq(tags);
-
-    // Create tag pages
-    tags.forEach((tag) => {
-      const tagPath = `/tags/${_.kebabCase(tag)}/`;
-
-      createPage({
-        path: tagPath,
-        component: path.resolve(`src/templates/tag.tsx`),
-        context: {
-          tag,
-        },
-      });
+  // Create Pages
+  items.forEach((edge) => {
+    const id = edge.node.id;
+    const frontmatterID = edge.node.frontmatter
+      ? edge.node.frontmatter.id
+      : undefined;
+    createPage({
+      path: edge.node.fields.slug,
+      component: path.resolve(componentPath),
+      // additional data can be passed via context
+      context: {
+        id,
+        frontmatterID,
+      },
     });
   });
 };
@@ -93,14 +75,44 @@ const setSlugPath = (node, actions, getNode) => {
   }
 };
 
-exports.createPages = async ({ actions, graphql }) => {
-  await createBlogPages(actions, graphql);
+const connectTagsToArticle = async (node, createNodeField, allTagNodes) => {
+  if (
+    node.internal.type != "MarkdownRemark" ||
+    node.frontmatter.templateKey != "blog-article"
+  ) {
+    return;
+  }
+  const tagIDs = node.frontmatter.tagIDs || [];
+  const tags = tagIDs.map((id) =>
+    allTagNodes.find((n) => n.frontmatter.id == id),
+  );
+  createNodeField({
+    node,
+    name: `tags`,
+    value: tags,
+  });
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.createPages = async ({ actions, graphql }) => {
+  await createTemplatePages(
+    actions,
+    graphql,
+    "blog-article",
+    "src/templates/article.tsx",
+  );
+  await createTemplatePages(actions, graphql, "tags", "src/templates/tag.tsx");
+};
+
+exports.onCreateNode = ({ node, actions, getNode, getNodesByType }) => {
+  const { createNodeField } = actions;
   fmImagesToRelative(node); // Convert image paths for gatsby and netlify cms
   addFrontmatterMd(node); // Custom plugin to transform frontmatter prefixed with md to html
   setSlugPath(node, actions, getNode);
+  const allMDNodes = getNodesByType(`MarkdownRemark`);
+  const allTagNodes = allMDNodes.filter(
+    (n) => n.frontmatter.templateKey === "tags",
+  );
+  connectTagsToArticle(node, createNodeField, allTagNodes);
   return node;
 };
 
