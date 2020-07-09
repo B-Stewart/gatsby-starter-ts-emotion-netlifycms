@@ -1,14 +1,15 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "../link";
-import { IoMdMenu } from "react-icons/io";
 import { ReactComponent as Logo } from "../../media/images/icons/logo.svg";
-import { IconType } from "react-icons/lib/cjs";
+// import { menuOutline } from "ionicons/icons";
+// import { IonIcon } from "@ionic/react";
+// import "ionicons";
 
 export interface IHeaderLink {
   to: string;
   name?: string;
-  component?: IconType;
+  iconName?: string;
 }
 
 export interface IHeaderProps {
@@ -22,14 +23,14 @@ export interface IHeaderState {
 export const Header: React.FC<IHeaderProps> = ({ links }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const linkComponents = links.map(({ to, name, component: Component }, i) => (
+  const linkComponents = links.map(({ to, name, iconName }, i) => (
     <Link
       key={i}
       to={to}
       onClick={() => setMenuOpen(false)}
-      className="no-underline text-black block py-2 md:py-0 md:inline-block mr-4 uppercase cursor-pointer border-b border-neutral-300 last:border-0 md:border-b-0 hover:text-neutral-600"
+      className="no-underline text-black block py-2 md:py-0 md:flex mr-4 uppercase cursor-pointer border-b border-neutral-300 last:border-0 md:border-b-0 hover:text-neutral-600"
     >
-      {name ? name : <Component className="h-5 w-5 md:h-4 md:w-4" />}
+      {name ? name : <ion-icon name={iconName} class="h-5 w-5" />}
     </Link>
   ));
 
@@ -38,14 +39,14 @@ export const Header: React.FC<IHeaderProps> = ({ links }) => {
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/" className="block text-lg h-8">
-            <Logo className="h-full w-full" />
+            <Logo className="h-full" />
           </Link>
-          <div className="hidden md:block">{linkComponents}</div>
-          <div className="block md:hidden">
-            <IoMdMenu
-              className="cursor-pointer h-8 w-8"
-              onClick={() => setMenuOpen(!isMenuOpen)}
-            />
+          <div className="hidden md:flex items-center">{linkComponents}</div>
+          <div
+            className="flex items-center md:hidden"
+            onClick={() => setMenuOpen(!isMenuOpen)}
+          >
+            <ion-icon name="menu-outline" class="cursor-pointer h-8 w-8" />
           </div>
         </div>
 

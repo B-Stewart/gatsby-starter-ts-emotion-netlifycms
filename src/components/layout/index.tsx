@@ -4,7 +4,7 @@ import * as React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { Header } from "../header";
 import { Footer } from "../footer";
-import { IoLogoGithub } from "react-icons/io";
+import { Helmet } from "react-helmet";
 
 interface ILayoutQueryData {
   header: {
@@ -37,6 +37,16 @@ export const Layout: React.FC = ({ children }) => {
 
   return (
     <>
+      <Helmet>
+        <script
+          type="module"
+          src="//unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+          nomodule=""
+          src="//unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"
+        ></script>
+      </Helmet>
       <Header
         links={[
           ...links.map((l) => ({
@@ -46,7 +56,7 @@ export const Layout: React.FC = ({ children }) => {
           {
             to:
               "https://github.com/B-Stewart/gatsby-starter-typescript-tailwindcss-netlifycms",
-            component: IoLogoGithub,
+            iconName: `logo-github`,
           },
         ]}
       />
