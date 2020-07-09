@@ -3,6 +3,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const nativeFontStack = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
 module.exports = {
+  important: true,
   theme: {
     fontFamily: {
       header: ["Playfair Display", nativeFontStack],
@@ -36,6 +37,6 @@ module.exports = {
     "visited",
     "disabled",
   ],
-  purge: ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.js"],
+  purge: ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.js", "./cms/**/*.md"],
   plugins: [],
 };

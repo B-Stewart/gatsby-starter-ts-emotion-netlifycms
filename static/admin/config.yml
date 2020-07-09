@@ -31,13 +31,28 @@ collections:
           required: false,
         }
       - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Tags"
+        name: "tagIDs"
+        widget: relation
+        collection: "tags"
+        displayFields: ["title"]
+        searchFields: ["title"]
+        valueField: "id"
+        multiple: true
+  - name: "tags"
+    label: "Blog Tags"
+    folder: "cms/tags"
+    create: true
+    slug: "{{slug}}"
+    fields:
       - {
-          label: "Tags",
-          name: "tags",
-          widget: "list",
-          required: false,
-          hint: "Comma Seperated",
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "tags",
         }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "ID", name: "id", widget: "ncw-id" }
   - label: "Pages"
     name: "pages"
     files:

@@ -32,6 +32,7 @@
     "not dead"
   ],
   "dependencies": {
+    "@ncwidgets/id": "0.8.1",
     "@svgr/webpack": "5.4.0",
     "clsx": "1.1.1",
     "gatsby": "2.23.22",
@@ -54,7 +55,6 @@
     "gatsby-transformer-remark": "2.8.23",
     "gatsby-transformer-sharp": "2.5.10",
     "ionicons": "5.1.2",
-    "lodash.kebabcase": "4.1.1",
     "netlify-cms-app": "2.12.16",
     "normalize.css": "8.0.1",
     "pigeon-maps": "0.15.0",

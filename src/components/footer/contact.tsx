@@ -11,7 +11,7 @@ export const Contact: React.SFC<IContactProps> = ({ title, description }) => {
   return (
     <div id="contact" className="container py-16 text-center">
       <h2 className="text-2xl">{title}</h2>
-      <p>{description}</p>
+      <div>{description}</div>
       <form
         className="w-full max-w-lg mx-auto mt-8"
         name="contact"

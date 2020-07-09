@@ -30,7 +30,7 @@ const IndexPage: React.FC<IIndexPageProps> = ({ data }) => {
               <div className="uppercase text-lg font-semibold mb-2">
                 {ib.title}
               </div>
-              <p>{ib.content}</p>
+              <div>{ib.content}</div>
             </div>
           ))}
         </div>

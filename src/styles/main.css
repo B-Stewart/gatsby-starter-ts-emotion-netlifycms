@@ -9,6 +9,11 @@ h6 {
   @apply font-header;
   letter-spacing: 1px;
   color: theme("colors.primary.600");
+  @apply mb-4;
+}
+
+p {
+  @apply mb-4;
 }
 
 h1 {
@@ -46,7 +51,11 @@ a {
   @apply duration-300;
 }
 
-a:hover {
+a:not(.btn) {
+  @apply text-secondary-600;
+}
+
+a:not(.btn):hover {
   @apply text-secondary-300;
 }
 

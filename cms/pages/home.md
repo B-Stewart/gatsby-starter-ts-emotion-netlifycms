@@ -1,6 +1,6 @@
 ---
 templateKey: home-page
-title: We Love Emotion
+title: We Love Tailwind
 heroVideo: /uploads/home-video.mp4
 bannerImg: /uploads/workers.jpg
 highlights:
@@ -17,7 +17,8 @@ highlights:
       integration makes it easy to work with in all use cases.
     title: NetlifyCMS
 ---
-# Emotion, TypeScript, and NetlifyCMS
+
+# Tailwind, TypeScript, and NetlifyCMS
 
 There isn't a better tech stack currently for developing small static sites. Hosted on Netlify for fast performance
 
