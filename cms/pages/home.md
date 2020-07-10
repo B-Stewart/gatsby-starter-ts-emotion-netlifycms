@@ -20,6 +20,6 @@ highlights:
 
 # Tailwind, TypeScript, and NetlifyCMS
 
-There isn't a better tech stack currently for developing small static sites. Hosted on Netlify for fast performance
+There isn't a better tech stack for developing small static sites. Hosted on Netlify for fast performance
 
 <a href="#contact" class="btn mt-4">Learn More</a>

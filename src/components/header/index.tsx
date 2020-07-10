@@ -2,9 +2,9 @@ import * as React from "react";
 import { useState } from "react";
 import { Link } from "../link";
 import { ReactComponent as Logo } from "../../media/images/icons/logo.svg";
-// import { menuOutline } from "ionicons/icons";
-// import { IonIcon } from "@ionic/react";
-// import "ionicons";
+import { useStaticQuery, graphql } from "gatsby";
+import { IChildImageSharpFluid } from "../../interfaces";
+import GatsbyImage from "gatsby-image";
 
 export interface IHeaderLink {
   to: string;
@@ -12,21 +12,59 @@ export interface IHeaderLink {
   iconName?: string;
 }
 
-export interface IHeaderProps {
-  links: IHeaderLink[];
-}
+export interface IHeaderProps {}
 
 export interface IHeaderState {
   isMenuOpen: boolean;
 }
 
-export const Header: React.FC<IHeaderProps> = ({ links }) => {
+interface ILayoutQueryData {
+  header: {
+    frontmatter: {
+      logo: IChildImageSharpFluid;
+      links: {
+        link: string;
+        name?: string;
+        iconName?: string;
+      }[];
+    };
+  };
+}
+
+export const Header: React.FC<IHeaderProps> = () => {
+  const {
+    header: {
+      frontmatter: { links, logo },
+    },
+  }: ILayoutQueryData = useStaticQuery(graphql`
+    query LayoutQuery {
+      header: markdownRemark(frontmatter: { templateKey: { eq: "header" } }) {
+        frontmatter {
+          logo {
+            childImageSharp {
+              fluid(maxHeight: 32, quality: 80) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+            publicURL
+            extension
+          }
+          links {
+            link
+            name
+            iconName
+          }
+        }
+      }
+    }
+  `);
+
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const linkComponents = links.map(({ to, name, iconName }, i) => (
+  const linkComponents = links.map(({ link, name, iconName }, i) => (
     <Link
       key={i}
-      to={to}
+      to={link}
       onClick={() => setMenuOpen(false)}
       className="no-underline text-black block py-2 md:py-0 md:flex mr-4 uppercase cursor-pointer border-b border-neutral-300 last:border-0 md:border-b-0 hover:text-neutral-600"
     >
@@ -39,7 +77,15 @@ export const Header: React.FC<IHeaderProps> = ({ links }) => {
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/" className="block text-lg h-8">
-            <Logo className="h-full" />
+            {/* TODO: Clean up */}
+            {logo.extension === "svg" ? (
+              <img src={logo.publicURL} alt="Logo" className="h-full" />
+            ) : (
+              <GatsbyImage
+                sizes={logo.childImageSharp.fluid}
+                className="h-full"
+              />
+            )}
           </Link>
           <div className="hidden md:flex items-center">{linkComponents}</div>
           <div

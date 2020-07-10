@@ -133,11 +133,31 @@ collections:
               widget: hidden,
               default: "header",
             }
+          - {
+              label: "Logo",
+              name: "logo",
+              widget: "image",
+              allow_multiple: false,
+              required: true,
+            }
+          - {
+              label: "Favicon",
+              name: "favicon",
+              widget: "image",
+              allow_multiple: false,
+              required: true,
+            }
           - label: "Links"
             name: "links"
             widget: "list"
             fields:
-              - { label: Name, name: name, widget: string }
+              - { label: Name, name: name, widget: string, required: false }
+              - {
+                  label: Icon Name,
+                  name: iconName,
+                  widget: string,
+                  required: false,
+                }
               - { label: Link, name: link, widget: string }
       - label: "Footer"
         name: "footer"

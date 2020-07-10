@@ -21,22 +21,19 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 ## Dependency Notes
 
 - [CLSX](https://github.com/lukeed/clsx) - Helps with logic heavy construction of class attributes for css.
+- [Ionicons](https://ionicons.com/) - Web Component string based icons so we can use from CMS
 
 # TODO:
 
-- Evalute article description field / excerpt?
-- Verify blog styles / write example blogs
-- Have netlifycms start with start command
-- Swap googlefonts with typeface
-- Better way to add icons to header links
 - Move Logo to CMS
 - Move Favicon to CMS
-- Move More Content to CMS
-- Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
+- Move All Content to CMS
+- Evalute article description field / excerpt?
+- Verify blog styles / write example blogs
 - Future blog publishes
+- Make sure the netlify relative CMS plugin doesn't conflict with links in markdown (/blog went to ../blog)
 - Work on TODOs
 - Clean Up Readme
-- Move all theme styles to CMS data
 - Consider consolidating 404 and thanks page to a generic page "type" with title / subtitle
 - Consider moving layout to templates?
 - Add ESLint
@@ -44,10 +41,23 @@ Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick
 - Bundle Optimization
 - Add Preact?
 - Do lighthouse checks
+- Figure out why lighthouse badges doesn't work with locally installed npx
 - Optimize css dev changes, seem to make dev process hang on any css change
-- Improve preview
-- storybook?
-- unit tests?
 - describe dependencies and usefulness
 - Templatize it for plug and play
-- Figure out why lighthouse badges doesn't work with locally installed npx
+
+# Future Projects:
+
+1. Font Optimization
+
+   - Look into loading fonts through CMS
+   - Possibly use typeface instead of Google Fonts
+
+2. Icon Optimization
+
+   - Better way to load in icons via string
+   - Better way to identify icon names in CMS
+
+3. Theme Optimization
+   - Move all color options to CMS
+     - Most likely through tailwind css variables on build

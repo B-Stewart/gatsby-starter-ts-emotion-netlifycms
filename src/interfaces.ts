@@ -7,11 +7,13 @@ export interface IFluidImage {
   sizes: string;
   originalImg: string;
 }
-
+// TODO: Rename this to file
 export interface IChildImageSharpFluid {
   childImageSharp: {
     fluid: IFluidImage;
   };
+  publicURL: string;
+  extension: string;
 }
 
 export interface IFileUpload {
