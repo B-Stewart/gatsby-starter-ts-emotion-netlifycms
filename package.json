@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@types/react-helmet": "6.0.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "netlify-lambda": "1.6.3",
     "tailwindcss": "1.4.6",
     "autoprefixer": "9.8.4",
