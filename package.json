@@ -63,7 +63,7 @@
     "react-helmet": "6.1.0",
     "react-scroll": "1.7.16",
     "remark": "12.0.0",
-    "remark-html": "11.0.2"
+    "remark-html": "13.0.2"
   },
   "devDependencies": {
     "@types/react-helmet": "6.0.0",
